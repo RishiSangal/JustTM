@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/activities"
+            android:icon="@drawable/activity"
+
+            android:title="@string/activities" />
+        <item
+            android:id="@+id/lifeLine"
+            android:icon="@drawable/lifeline"
+            android:title="@string/life_line" />
+
+        <item android:title="@string/my_locations">
+
+            <menu>
+
+
+                <item
+                    android:id="@+id/places"
+                    android:icon="@drawable/place"
+                    android:title="@string/places" />
+
+
+
+                <item
+                    android:id="@+id/myLocations"
+                    android:icon="@drawable/location"
+                    android:title="@string/day_wise_locations" />
+
+            </menu>
+        </item>
+
+
+        <item android:title="@string/refer_and_earn">
+            <menu>
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="@string/share" />
+                <item
+                    android:id="@+id/premium"
+                    android:icon="@drawable/premium"
+                    android:title="@string/premium" />
+            </menu>
+        </item>
+
+        <item android:title="@string/accounts">
+
+
+            <menu>
+
+
+
+
+                <item
+                    android:id="@+id/setting"
+                    android:icon="@drawable/setting"
+                    android:title="@string/settings" />
+                <item
+                    android:id="@+id/help"
+                    android:icon="@drawable/help"
+                    android:title="@string/help" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/logout"
+                    android:title="@string/logout" />
+
+
+            </menu>
+        </item>
+
+
+    </group>
+
+
+
+</menu>
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<menu xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+    <!--<group android:checkableBehavior="single">-->
+
+        <!--<item-->
+            <!--android:id="@+id/activities"-->
+            <!--android:icon="@drawable/activity"-->
+
+            <!--android:title="Activities" />-->
+        <!--<item-->
+            <!--android:id="@+id/lifeLine"-->
+            <!--android:icon="@drawable/lifeline"-->
+            <!--android:title="Life Line" />-->
+
+        <!--<item android:title="My Locations">-->
+
+        <!--<menu>-->
+
+
+        <!--<item-->
+            <!--android:id="@+id/places"-->
+            <!--android:icon="@drawable/place"-->
+            <!--android:title="Places" />-->
+
+
+
+        <!--<item-->
+            <!--android:id="@+id/myLocations"-->
+            <!--android:icon="@drawable/location"-->
+            <!--android:title="Day-wise Locations" />-->
+
+        <!--</menu>-->
+        <!--</item>-->
+
+
+        <!--<item android:title="@string/refer_and_earn">-->
+            <!--<menu>-->
+                <!--<item-->
+                    <!--android:id="@+id/nav_share"-->
+                    <!--android:icon="@drawable/ic_menu_share"-->
+                    <!--android:title="Share" />-->
+                <!--<item-->
+                    <!--android:id="@+id/premium"-->
+                    <!--android:icon="@drawable/premium"-->
+                    <!--android:title="Premium" />-->
+            <!--</menu>-->
+        <!--</item>-->
+
+        <!--<item android:title="Accounts">-->
+
+
+         <!--<menu>-->
+
+
+
+
+        <!--<item-->
+            <!--android:id="@+id/setting"-->
+            <!--android:icon="@drawable/setting"-->
+            <!--android:title="Settings" />-->
+        <!--<item-->
+            <!--android:id="@+id/help"-->
+            <!--android:icon="@drawable/help"-->
+            <!--android:title="Help" />-->
+        <!--<item-->
+            <!--android:id="@+id/logout"-->
+            <!--android:icon="@drawable/logout"-->
+            <!--android:title="Logout" />-->
+
+
+         <!--</menu>-->
+        <!--</item>-->
+
+
+    <!--</group>-->
+
+
+
+<!--</menu>-->

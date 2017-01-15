@@ -1,0 +1,31 @@
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/main_scrollview"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:fillViewport="true" >-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    tools:context="com.android.encypher.justtrackme.home.GroupDetailsFragment">
+
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/groupList1"
+
+
+
+        >
+
+    </ListView>
+
+
+
+</RelativeLayout>
+<!--</ScrollView>-->

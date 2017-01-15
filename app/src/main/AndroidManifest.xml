@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.encypher.justtrackme">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+
+    <application
+        android:name=".JustTrackMeApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:isScrollContainer="true"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustPan|stateVisible|adjustResize">
+        <activity
+            android:name="com.android.encypher.justtrackme.registration.MainActivity"
+            android:screenOrientation="portrait"
+            android:taskAffinity=".registration.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <service
+            android:name="com.android.encypher.justtrackme.service.UserService"
+            android:enabled="true" />
+
+        <receiver
+            android:name="com.android.encypher.justtrackme.service.BootCompleteReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.REBOOT" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="StartKilledService" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/maps_key" />
+
+        <activity
+            android:name="com.android.encypher.justtrackme.activities.GoogleMapsActivity"
+            android:label="@string/title_activity_google_maps"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.android.encypher.justtrackme.activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.encypher.justtrackme.home.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.android.encypher.justtrackme.activities.ContactActivity"
+            android:label="@string/title_activity_contact"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.android.encypher.justtrackme.nevigationdrawer.NevigationDrawerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.encypher.justtrackme.nevigationdrawer.MyLocationActivity"
+            android:label="@string/title_activity_my_location"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- android:taskAffinity="nevigationdrawer.LIfeLineActivity"> -->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name="com.android.encypher.justtrackme.nevigationdrawer.LIfeLineActivity"
+            android:screenOrientation="portrait" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.android.encypher.justtrackme.activities.MemberDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.encypher.justtrackme.activities.SmartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.android.encypher.justtrackme.activities.InfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.encypher.justtrackme.activities.PlaceMapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.encypher.justtrackme.activities.EmergencyActivity"
+            android:icon="@mipmap/ic_launcher"
+            android:label="Emergency "
+            android:screenOrientation="portrait"
+            android:taskAffinity="nevigationdrawer.LIfeLineActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.android.encypher.justtrackme.activities.LocationHistoryActivity" />
+
+        <activity android:name=".activities.WelcomeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activities.SignUpActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"  android:value="@string/app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1785119295096443"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDJx0Zi4Ry367EADmu991-Y57N4nliRr9Y" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+
+    </application>
+
+</manifest>

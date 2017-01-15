@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <color name="colorPrimary">#194a67</color>
+    <color name="colorPrimaryDark">#143b52</color>
+    <color name="app_background_color">#FFFFFF</color>
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
+    <color name="gold">#FFD700</color>
+    <!--<color name="transparent">#98000000</color>-->
+    <color name="transparent">#00000000</color>
+
+    <color name="app_color">#DE7C3F</color>
+    <color name="grey_divider">#E2E2E2</color>
+    <color name="dark_grey">#9A9A9A</color>
+    <color name="footer_background_color">#F1F1F1</color>
+    <color name="Black">#0B0A08</color>
+    <color name="sliding_menu_text_color">#8F8F8F</color>
+    <color name="app_text_color">#555555</color>
+    <color name="White">#FFFFFF</color>
+    <color name="app_black_color">#333333</color>
+    <color name="green">#1E892B</color>
+    <color name="blue">#2496B8</color>
+    <color name="cart_cell_color">#F8F8F8</color>
+    <color name="grey_darkest">#666666</color>
+</resources>

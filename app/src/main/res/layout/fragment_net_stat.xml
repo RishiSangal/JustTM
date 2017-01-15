@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_marginTop="55dp"
+        android:layout_height="45dp"
+        android:padding="5dp"
+
+        android:stretchColumns="1">
+        <TableRow>
+            <TextView
+                android:text="GPS"
+                android:textSize="19dp"
+                android:id="@+id/netstatus"
+
+                android:padding="3dip" />
+            <TextView
+                android:text="TIME"
+                android:gravity="center"
+                android:textSize="19dp"
+                android:padding="3dip" />
+            <TextView
+                android:text="STATUS"
+                android:textSize="19dp"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+
+    </TableLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gpsList"
+        android:layout_marginTop="95dp"
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="2dp"
+        >
+
+
+    </ListView>
+
+</FrameLayout>

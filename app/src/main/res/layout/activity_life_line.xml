@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_par"
+    android:fitsSystemWindows="true"
+    tools:context="com.android.encypher.justtrackme.nevigationdrawer.LIfeLineActivity">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/placeToolbar"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize">-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:paddingRight="8dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:id="@+id/back"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:src="@drawable/left_arrow"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Emergency Contacts"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="19dp"-->
+                <!--/>-->
+        <!--</android.support.v7.widget.Toolbar>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:elevation="5dp"
+        android:layout_marginLeft="36dp"
+        android:src="@drawable/add"
+
+        android:background="@drawable/main_circle_green"
+        android:id="@+id/cont1"
+        android:layout_marginTop="150dp"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:elevation="5dp"
+        android:id="@+id/cont2"
+        android:background="@drawable/main_circle_green"
+        android:src="@drawable/add"
+        android:layout_alignTop="@+id/cont1"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:id="@+id/cont3"
+        android:elevation="5dp"
+        android:layout_marginRight="36dp"
+
+        android:background="@drawable/main_circle_green"
+        android:src="@drawable/add"
+        android:layout_alignTop="@+id/cont2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Add Emergency Friend"
+        android:id="@+id/textView5"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="If you need help, we will send\nYour Location To these 3 persons."
+        android:id="@+id/textView6"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar4"
+        android:visibility="gone"
+        android:layout_below="@+id/cont2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Not Selected"
+        android:gravity="center"
+        android:id="@+id/cn1"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/cont1"
+        android:layout_toStartOf="@+id/cn2"
+        android:layout_marginEnd="16dp" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Not Selected"
+        android:gravity="center"
+        android:id="@+id/cn2"
+        android:layout_alignTop="@+id/cn1"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Not Selected"
+        android:gravity="center"
+
+        android:id="@+id/cn3"
+        android:layout_alignTop="@+id/cn2"
+        android:layout_alignStart="@+id/cont3" />
+</RelativeLayout>
+</RelativeLayout>

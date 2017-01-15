@@ -1,0 +1,134 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/log_back"
+    android:fillViewport="true">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+
+        tools:context="com.android.encypher.justtrackme.registration.SignUpFragment"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Edit your account"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView111"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
+
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ring"
+            android:id="@+id/imageOfUser"
+
+            android:src="@drawable/hamburger" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+
+            android:hint=" First name"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
+
+            android:id="@+id/signUpFirstName"
+
+
+            />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:hint=" Last name"
+            android:layout_marginTop="20dp"
+            android:id="@+id/signUpLastName"
+            android:layout_gravity="center"
+
+            android:paddingLeft="15dp"
+            android:inputType="textEmailAddress"
+
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+      </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:hint="Email"
+            android:id="@+id/Emailorphone"
+            android:inputType="textEmailAddress"
+
+            android:paddingLeft="15dp"
+            android:layout_gravity="center"
+
+
+            android:layout_marginTop="20dp" />
+
+</android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:hint="Phone"
+            android:layout_marginTop="20dp"
+            android:id="@+id/pass1"
+            android:paddingLeft="15dp"
+            android:inputType="number"
+            android:layout_gravity="center"
+
+            android:lines="1"
+
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:text="Save"
+            android:id="@+id/signupButton"
+            android:background="@drawable/buttonbox"
+            android:textColor="#ffffff"
+            android:layout_gravity="center"
+            android:layout_weight="0.0"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+    </LinearLayout>
+</ScrollView>

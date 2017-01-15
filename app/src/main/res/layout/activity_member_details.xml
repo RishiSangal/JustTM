@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.android.encypher.justtrackme.activities.MemberDetailsActivity"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/memberActivity"
+        android:layout_height="match_parent">
+
+
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/placeToolbar"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize">-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:paddingRight="8dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:id="@+id/back"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:src="@drawable/left_arrow"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Member Details"-->
+                <!--android:id="@+id/memNam"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="19dp"-->
+                <!--/>-->
+        <!--</android.support.v7.widget.Toolbar>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/memeberDetailFragment"
+        android:layout_marginBottom="120dp"
+       />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:foregroundGravity="center"
+        android:padding="2dp"
+        android:id="@+id/memberImage"
+        android:background="@drawable/main_circle"
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignTop="@+id/memberDetial"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/removeButton" />
+
+    <TextView
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hcjsk"
+        android:id="@+id/memberDetial"
+        android:layout_above="@+id/textBatt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/memberImage"
+        android:layout_toEndOf="@+id/memberImage" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Exit Group"
+        android:id="@+id/removeButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text\nghsd"
+            android:paddingLeft="5dp"
+            android:id="@+id/textBatt"
+            android:layout_above="@+id/removeButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/memberImage"
+            android:layout_toEndOf="@+id/memberImage" />
+
+    </RelativeLayout>
+    </LinearLayout>
+
+

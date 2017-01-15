@@ -1,0 +1,59 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TwoWayView">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#ffffff</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#ffffff</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#ffffff</item>
+    </style>
+
+    <style name="Theme.MyAppTheme" parent="Theme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDisablePreview">true</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/scree_n</item>
+
+    </style>
+
+    <style name="CodeFont" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="NavigationDrawerStyle">
+        <item name="android:textSize">14sp</item><!-- text size in menu-->
+        <item name="android:textStyle">normal</item>
+        <item name="android:listPreferredItemHeightSmall">40dp</item><!-- item size in menu-->
+    </style>
+
+    <style name="Widget.MyApp.HeaderBar.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:divider">@null</item>
+        <item name="android:overlapAnchor">true</item>
+    </style>
+
+
+</resources>

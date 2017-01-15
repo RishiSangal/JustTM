@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/log_back"
+    android:padding="16dp"
+    tools:context="com.android.encypher.justtrackme.nevigationdrawer.SahreFragment">
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share"
+        android:id="@+id/shareButton"
+        android:paddingTop="5dp"
+        android:layout_marginBottom="25dp"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp" android:src="@drawable/logo"
+        android:id="@+id/imageView4"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="JUST TRACK ME"
+        android:id="@+id/textView12"
+        android:layout_below="@+id/imageView4"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Premium features include"
+        android:id="@+id/textView13"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/textView12"
+        android:layout_centerHorizontal="true" />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/prem"
+        android:id="@+id/imageView6"
+
+        android:layout_below="@+id/textView13"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

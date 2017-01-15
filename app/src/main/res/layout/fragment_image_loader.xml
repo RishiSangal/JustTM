@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/log_back"    android:gravity="center"
+    tools:context="com.android.encypher.justtrackme.registration.ImageLoaderFragment">
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/ilImage"
+        android:background="@drawable/ring"
+        android:src="@drawable/avatar"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="camera"
+        android:visibility="gone"
+        android:id="@+id/ilCamera"
+        android:layout_marginLeft="92dp"
+        android:layout_marginStart="92dp"
+        android:layout_below="@+id/ilImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="55dp"
+        android:layout_height="35dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textStyle="normal"
+        android:background="@color/transparent"
+
+        android:text="EDIT"
+        android:id="@+id/ilGallery"
+        android:layout_alignBottom="@+id/ilImage"
+        android:layout_alignLeft="@+id/progressBar2"
+        android:layout_alignStart="@+id/progressBar2" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="@drawable/buttonbox"
+        android:text="DONE"
+        android:id="@+id/ilcontinue"
+        android:layout_alignBottom="@+id/progressBar2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Add Your profile photo"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="15dp"
+        android:textSize="19dp"
+        android:id="@+id/textView4"
+
+        android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false" />
+</RelativeLayout>

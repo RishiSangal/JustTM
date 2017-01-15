@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCFFFFFF"
+    android:padding="16dp"
+    tools:context="com.android.encypher.justtrackme.home.FlaotingFragment">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        tools:context="com.android.encypher.justtrackme.home.FlaotingFragment">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/tag" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fab3"
+            android:visibility="invisible"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="26dp"
+            android:src="@drawable/delete" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fab1"
+            android:layout_alignLeft="@+id/fab1"
+            android:layout_alignStart="@+id/fab1"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="26dp"
+            android:src="@drawable/extra" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fab2"
+            android:layout_marginBottom="17dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:visibility="invisible"
+            android:layout_toLeftOf="@+id/fab2"
+            android:layout_toStartOf="@+id/fab2"
+            android:background="@drawable/text_box"
+            android:elevation="5dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:text="Remove Group"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#d41b1b" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fab3"
+            android:layout_alignLeft="@+id/textView9"
+            android:layout_alignStart="@+id/textView9"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/text_box"
+            android:elevation="5dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:text="Invite Others"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fab1"
+            android:layout_alignEnd="@+id/textView10"
+            android:layout_alignRight="@+id/textView10"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/text_box"
+            android:elevation="5dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:text="Tag Location"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/floatProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false" />
+</RelativeLayout>

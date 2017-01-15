@@ -1,0 +1,354 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/log_back"
+    android:fitsSystemWindows="true"
+
+    tools:context="com.android.encypher.justtrackme.nevigationdrawer.GlobalShareFragment">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="8dp"
+                    android:src="@drawable/left_arrow" />
+                <!--<ImageView-->
+                <!--android:layout_width="55dp"-->
+                <!--android:layout_height="55dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:src="@drawable/setting"-->
+                <!--/>-->
+
+
+                <TextView
+                    android:id="@+id/toolText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/back"
+                    android:layout_toRightOf="@+id/back"
+                    android:background="@color/transparent"
+                    android:paddingLeft="15dp"
+                    android:text="Settings"
+                    android:textColor="@color/white"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/transparent"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="EDIT"
+                    android:textColor="#ffffff"
+                    android:textSize="18dp" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:padding="16dp">
+
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view19"
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/gsUserImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/main_circle"
+                android:src="@drawable/avatar" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_above="@+id/gsUserName"
+                android:layout_toEndOf="@+id/gsUserImage"
+                android:layout_toRightOf="@+id/gsUserImage"
+                android:clickable="true"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:text="Username"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/gsUserName"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_alignBottom="@+id/gsUserImage"
+                android:layout_alignLeft="@+id/textView15"
+                android:layout_alignStart="@+id/textView15"
+                android:gravity="left"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:text="user name"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view12"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/card_view19"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="0dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+
+                <Switch
+                    android:id="@+id/gsSwitch1"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/gsUserName"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="23dp"
+                    android:layout_toEndOf="@+id/gsUserImage"
+                    android:layout_toRightOf="@+id/gsUserImage"
+                    android:checked="true"
+                    android:text="ON" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/gsUserImage"
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:layout_marginRight="85dp"
+                    android:text="Global Location sharing "
+                    android:textColor="#000000" />
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                card_view:contentPadding="10dp"
+                card_view:cardCornerRadius="2dp"
+
+                android:layout_below="@+id/card_view12"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:text="First Name"
+
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/fNmae1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+
+                    />
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/card_view1"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:text="Last Name"
+
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/lname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+
+                    android:text="FirstName\n\n Upadhyay."
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/card_view12"
+                android:layout_alignStart="@+id/card_view12"
+
+                android:layout_below="@+id/card_view2"
+
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:text="Mobile"
+
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/mob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/card_view2"
+                    android:layout_marginTop="35dp"
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:text="Mobile\n\n 9643580589"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/view2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/view"
+
+                android:layout_alignStart="@+id/view"
+                android:layout_below="@+id/view"
+
+
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:text="Email"
+
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/emai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/card_view2"
+                    android:layout_marginTop="35dp"
+                    android:clickable="true"
+                    android:paddingTop="5dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
+

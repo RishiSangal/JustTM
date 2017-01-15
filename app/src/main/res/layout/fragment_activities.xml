@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    tools:context="com.android.encypher.justtrackme.nevigationdrawer.ActivitiesFragment">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="0dp"-->
+        <!--android:id="@+id/placeToolbar"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+
+            <!--&gt;-->
+            <!--<ImageView-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:paddingRight="8dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:id="@+id/back"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:src="@drawable/left_arrow"/>-->
+            <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="50dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="50dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:paddingLeft="5dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:src="@drawable/help"/>&ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Activities"-->
+                <!--android:textSize="19dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:padding="5dp"-->
+                <!--/>-->
+
+
+
+        <!--</android.support.v7.widget.Toolbar>-->
+
+
+
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/activityList"
+        android:background="@color/white"
+         />
+
+
+</RelativeLayout>

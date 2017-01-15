@@ -1,0 +1,78 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/emailRel"
+        android:background="@drawable/log_back"
+        android:orientation="vertical"
+        android:padding="25dp"
+        tools:context="com.android.encypher.justtrackme.registration.SplashFragment">
+
+
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:id="@+id/imageView8"
+        android:src="@drawable/fever_fluid"
+ />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Add Your Mobile Number"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/tetxEmail"
+        />
+
+    <Spinner
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:id="@+id/spinner"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:theme="@android:style/Theme.Holo.Light"
+        android:layout_marginBottom="25dp"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:layout_marginTop="35dp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/emailEditText"
+
+                android:layout_marginBottom="38dp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+
+        <Button
+            android:layout_width="355dp"
+            android:layout_height="45dp"
+            android:id="@+id/emailButton"
+            android:text="CONTINUE"
+            android:textColor="#ffffff"
+            android:background="@drawable/buttonbox"
+            android:layout_marginBottom="39dp"
+          />
+
+
+
+
+
+</LinearLayout>
+
