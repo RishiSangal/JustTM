@@ -87,6 +87,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import net.ralphpina.permissionsmanager.PermissionsManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,7 +99,6 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private int lastTopValue = 0;
-    SupportMapFragment supportMapFragment;
     ImageView transparentImageView;
     ArrayList<String> circle_id = new ArrayList();
     int pos = 0;
@@ -139,6 +140,7 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
 
         sharedPreferences = getSharedPreferences("piyush", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "0");
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         permissionCheck();
         pr = (ProgressBar) findViewById(R.id.progressBar);
@@ -196,7 +198,6 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
 
         try {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         } catch (NullPointerException e) {
             Log.e(TAG, e.toString());
         }
@@ -723,37 +724,28 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
 
 
         if ((int) Build.VERSION.SDK_INT > 22) {
+//            int permissionCheck1 = ContextCompat.checkSelfPermission(HomeActivity.this,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION);
+//            // Assume thisActivity is the current activity
+//            int permissionCheck2 = ContextCompat.checkSelfPermission(HomeActivity.this,
+//                    Manifest.permission.ACCESS_FINE_LOCATION);
 //
-
-            int permissionCheck1 = ContextCompat.checkSelfPermission(HomeActivity.this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION);
-            // Assume thisActivity is the current activity
-            int permissionCheck2 = ContextCompat.checkSelfPermission(HomeActivity.this,
-                    Manifest.permission.ACCESS_FINE_LOCATION);
-
-            if (permissionCheck1 == PackageManager.PERMISSION_GRANTED && permissionCheck2 == PackageManager.PERMISSION_GRANTED) {
-
-                Log.e("hey", "permission ififi granted");
-                Intent in1 = new Intent(HomeActivity.this, UserService.class);
-                startService(in1);
-
-
-            } else {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
+//            if (permissionCheck1 == PackageManager.PERMISSION_GRANTED && permissionCheck2 == PackageManager.PERMISSION_GRANTED) {
+//                Log.e("hey", "permission ififi granted");
+//                Intent in1 = new Intent(HomeActivity.this, UserService.class);
+//                startService(in1);
+//            } else {
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+//                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+//            }
+            if (!PermissionsManager.get().isLocationGranted()){
+                PermissionsManager.get().requestLocationPermission(HomeActivity.this);
             }
 
-            Log.e("hey", "permission   tuut granted");
-
-
         } else {
-
             Intent in1 = new Intent(HomeActivity.this, UserService.class);
             startService(in1);
-
         }
     }
 
@@ -761,26 +753,16 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     Log.e("hey", "permission granted");
-
                     // permission was granted, yay! Do the
-
                     // contacts-related task you need to do.
-
-
-                } else {
-
+                    } else {
                     Toast.makeText(HomeActivity.this, "permission not granted", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
 
