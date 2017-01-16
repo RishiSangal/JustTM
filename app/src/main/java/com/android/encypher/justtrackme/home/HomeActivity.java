@@ -49,6 +49,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.android.encypher.justtrackme.activities.BaseActivity;
 import com.android.encypher.justtrackme.activities.InfoActivity;
@@ -92,7 +93,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends BaseActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, Communicator, AbsListView.OnScrollListener {
+public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Communicator, AbsListView.OnScrollListener {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private int lastTopValue = 0;
@@ -128,18 +129,14 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Na
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Window window = this.getWindow();
-        // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-// finally change the color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         }
 
         setContentView(R.layout.activity_home);
+
         sharedPreferences = getSharedPreferences("piyush", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "0");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -163,22 +160,10 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Na
         listView = (ListView) findViewById(R.id.groupList);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabHome);
         assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                FlaotingFragment s = new FlaotingFragment();
-                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.drawer_layout, s);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                s.data(userId, circle_id.get(pos));
-
-            }
-        });
+        fab.setOnClickListener(fabClick);
 
 
-        android.support.v4.widget.SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         assert swipeRefreshLayout != null;
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -199,67 +184,11 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Na
         mapFragment.getMapAsync(this);
         Log.e("going for map", "map");
 
-        transparentImageView.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Disallow ScrollView to intercept touch events.
-                        listView.requestDisallowInterceptTouchEvent(true);
-                        // Disable touch on transparent view
-                        return false;
-
-                    case MotionEvent.ACTION_UP:
-                        // Allow ScrollView to intercept touch events.
-                        listView.requestDisallowInterceptTouchEvent(false);
-                        return true;
-
-                    case MotionEvent.ACTION_MOVE:
-                        listView.requestDisallowInterceptTouchEvent(true);
-                        return false;
-
-                    default:
-                        return true;
-                }
-            }
-        });
+        transparentImageView.setOnTouchListener(transparentImageClick);
 
 
         listView.setOnScrollListener(HomeActivity.this);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String adm = "";
-
-                Log.e("position in listView", "" + position + memLong.get(position - 1) + "dd" + userId);
-
-                for (int i = 0; i < admin.size(); i++) {
-                    if (userId.equals(admin.get(i))) {
-                        adm = "yes";
-//                        Toast.makeText(HomeActivity.this,"yes he is admin",Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                Intent in = new Intent(HomeActivity.this, MemberDetailsActivity.class);
-                in.putExtra("memImage", memImage.get(position - 1));
-                in.putExtra("memName", memName.get(position - 1));
-                in.putExtra("memLat", memLat.get(position - 1));
-                in.putExtra("memTime", memTime.get(position - 1));
-                in.putExtra("memLong", memLong.get(position - 1));
-                in.putExtra("memGs", memGs.get(position - 1));
-                in.putExtra("userId", userId);
-                in.putExtra("admin", adm);
-                in.putExtra("circle_id", circle_id.get(pos));
-                in.putExtra("memId", memberId.get(position - 1));
-                in.putExtra("lastBattery", lastBattery.get(position - 1));
-                startActivity(in);
-
-
-            }
-        });
+        listView.setOnItemClickListener(listViewClick);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -273,51 +202,14 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Na
         }
 
         switchButton = (Switch) findViewById(R.id.switch1);
-        assert switchButton != null;
-//        switchButton.setChecked(true);
-        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
-
-//                Log.e("status00011", status + " main" + sharedStatus.get(pos));
-//                i/++;
-
-
-                if (bChecked) {
-
-//                        Log.e("status000", status);
-//                    if (sharedStatus.get(pos).equals("public")) {
-                    status = "public";
-
-                } else {
-//                    if (sharedStatus.get(pos).equals("private")) {
-                    status = "private";
-//                        Log.e("status000", status);
-//
-//
-//                    }
-                }
-
-
-                Log.e("chal gya ", "chal gya");
-
-                changeincircleshare(getResources().getString(R.string.url) + "changeincircleshare&" + "user_id=" + userId + "&circle_id=" + circle_id.get(pos) + "&shared_status=", status);
-
-            }
-        });
-
         TextView checkIn = (TextView) findViewById(R.id.toolText);
+
+        assert switchButton != null;
         assert checkIn != null;
-        checkIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                addCheckInName("1");
+        switchButton.setOnCheckedChangeListener(switchButtonClick);
+        checkIn.setOnClickListener(checkInClick);
 
-
-            }
-        });
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         assert drawer != null;
@@ -326,41 +218,205 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Na
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         assert navigationView != null;
-        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+        navigationView.setNavigationItemSelectedListener(navigationViewSelected);
 
         hView = navigationView.getHeaderView(0);
 
         sp = (Spinner) findViewById(R.id.toolSpinner);
+        sp.setOnItemSelectedListener(spinnerClick);
+        new Abc().execute();
+    }
 
-        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                groupName = parent.getItemAtPosition(position).toString();
+    private View.OnTouchListener transparentImageClick = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            int action = event.getAction();
+            switch (action) {
+                case MotionEvent.ACTION_DOWN:
+                    // Disallow ScrollView to intercept touch events.
+                    listView.requestDisallowInterceptTouchEvent(true);
+                    // Disable touch on transparent view
+                    return false;
 
+                case MotionEvent.ACTION_UP:
+                    // Allow ScrollView to intercept touch events.
+                    listView.requestDisallowInterceptTouchEvent(false);
+                    return true;
 
-                Log.e("new groupsad", "going to add");
+                case MotionEvent.ACTION_MOVE:
+                    listView.requestDisallowInterceptTouchEvent(true);
+                    return false;
 
+                default:
+                    return true;
+            }
+        }
+    };
 
-                if (groupName.equals("New Group")) {
+    private View.OnClickListener checkInClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            addCheckInName("1");
+        }
+    };
 
-                    Log.e("new gropu", "going to add");
-
-                    addCheckInName("2");
-
-                } else {
-                    groupDetails(getResources().getString(R.string.url) + "circleDetails&user_id=" + userId + "&circle_id=" + circle_id.get(position));
-                    Log.e("detail gropup", "going to add");
-                    pos = position;
-
+    private AdapterView.OnItemClickListener listViewClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String adm = "";
+            Log.e("position in listView", "" + position + memLong.get(position - 1) + "dd" + userId);
+            for (int i = 0; i < admin.size(); i++) {
+                if (userId.equals(admin.get(i))) {
+                    adm = "yes";
                 }
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            Intent in = new Intent(HomeActivity.this, MemberDetailsActivity.class);
+            in.putExtra("memImage", memImage.get(position - 1));
+            in.putExtra("memName", memName.get(position - 1));
+            in.putExtra("memLat", memLat.get(position - 1));
+            in.putExtra("memTime", memTime.get(position - 1));
+            in.putExtra("memLong", memLong.get(position - 1));
+            in.putExtra("memGs", memGs.get(position - 1));
+            in.putExtra("userId", userId);
+            in.putExtra("admin", adm);
+            in.putExtra("circle_id", circle_id.get(pos));
+            in.putExtra("memId", memberId.get(position - 1));
+            in.putExtra("lastBattery", lastBattery.get(position - 1));
+            startActivity(in);
+        }
+    };
+
+    private CompoundButton.OnCheckedChangeListener switchButtonClick = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                status = "public";
+            } else {
+                status = "private";
             }
-        });
-        new Abc().execute();
-    }
+            changeincircleshare(getResources().getString(R.string.url) + "changeincircleshare&" + "user_id=" + userId + "&circle_id=" + circle_id.get(pos) + "&shared_status=", status);
+        }
+    };
+
+    private View.OnClickListener fabClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            FlaotingFragment s = new FlaotingFragment();
+            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.drawer_layout, s);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            s.data(userId, circle_id.get(pos));
+        }
+    };
+
+    private AdapterView.OnItemSelectedListener spinnerClick = new AdapterView.OnItemSelectedListener() {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            groupName = parent.getItemAtPosition(position).toString();
+            Log.e("new groupsad", "going to add");
+            if (groupName.equals("New Group")) {
+                Log.e("new gropu", "going to add");
+                addCheckInName("2");
+            } else {
+                groupDetails(getResources().getString(R.string.url) + "circleDetails&user_id=" + userId + "&circle_id=" + circle_id.get(position));
+                Log.e("detail gropup", "going to add");
+                pos = position;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    };
+
+    private NavigationView.OnNavigationItemSelectedListener navigationViewSelected = new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item) {
+            int id = item.getItemId();
+
+            if (id == R.id.activities) {
+
+                Intent in = new Intent(HomeActivity.this, NevigationDrawerActivity.class);
+                in.putExtra("data", "activities");
+                startActivity(in);
+
+
+            } else if (id == R.id.lifeLine) {
+
+                Intent in = new Intent(HomeActivity.this, LIfeLineActivity.class);
+
+                startActivity(in);
+
+
+            } else if (id == R.id.places) {
+
+                RealPlacesFragment s = new RealPlacesFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.drawer_layout, s);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            } else if (id == R.id.premium) {
+
+                PremiumFragment s = new PremiumFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.drawer_layout, s);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+            } else if (id == R.id.setting) {
+//
+//            Intent in = new Intent(HomeActivity.this, NevigationDrawerActivity.class);
+//            in.putExtra("data", "settings");
+//            startActivity(in);
+
+                z = 1;
+                GlobalShareFragment s = new GlobalShareFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.drawer_layout, s);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+            } else if (id == R.id.logout) {
+                logoutPopup();
+
+            } else if (id == R.id.help) {
+
+
+                HelpFragment s = new HelpFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.drawer_layout, s);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+            } else if (id == R.id.nav_share) {
+
+                SahreFragment s = new SahreFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.drawer_layout, s);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+            } else if (id == R.id.myLocations) {
+                Intent in = new Intent(HomeActivity.this, MyLocationActivity.class);
+                in.putExtra("memberdata","home");
+                startActivity(in);
+
+            }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            assert drawer != null;
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+    };
 
     public void addSpinnerValue() {
         spinnerValue.clear();
@@ -838,90 +894,11 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Na
 
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.activities) {
-
-            Intent in = new Intent(HomeActivity.this, NevigationDrawerActivity.class);
-            in.putExtra("data", "activities");
-            startActivity(in);
-
-
-        } else if (id == R.id.lifeLine) {
-
-            Intent in = new Intent(HomeActivity.this, LIfeLineActivity.class);
-
-            startActivity(in);
-
-
-        } else if (id == R.id.places) {
-
-            RealPlacesFragment s = new RealPlacesFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.drawer_layout, s);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-        } else if (id == R.id.premium) {
-
-            PremiumFragment s = new PremiumFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.drawer_layout, s);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-
-        } else if (id == R.id.setting) {
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
 //
-//            Intent in = new Intent(HomeActivity.this, NevigationDrawerActivity.class);
-//            in.putExtra("data", "settings");
-//            startActivity(in);
-
-            z = 1;
-            GlobalShareFragment s = new GlobalShareFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.drawer_layout, s);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-
-        } else if (id == R.id.logout) {
-            logoutPopup();
-
-        } else if (id == R.id.help) {
-
-
-            HelpFragment s = new HelpFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.drawer_layout, s);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-
-        } else if (id == R.id.nav_share) {
-
-            SahreFragment s = new SahreFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.drawer_layout, s);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-
-        } else if (id == R.id.myLocations) {
-            Intent in = new Intent(HomeActivity.this, MyLocationActivity.class);
-            in.putExtra("memberdata","home");
-            startActivity(in);
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        assert drawer != null;
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//    }
 
     @Override
     public void onDestroy() {

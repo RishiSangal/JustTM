@@ -230,7 +230,7 @@ public class SignUpActivity extends BaseActivity{
             case Crop.REQUEST_PICK:
                 Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis()+".jpg"));
                 //			new Crop(data.getData()).output(outputUri).asSquare().start(this);
-                new Crop(data.getData()).output(outputUri).asSquare().start(this);
+                Crop.of(data.getData(), outputUri).asSquare().start(this);
                 break;
             case Crop.REQUEST_CROP:
                 handleCrop(resultCode, data);
@@ -256,7 +256,7 @@ public class SignUpActivity extends BaseActivity{
                                                     public void run() {
                                                         dismissDialog();
                                                         Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis()));
-                                                        new Crop(uri).output(outputUri).asSquare().start(SignUpActivity.this);
+                                                        Crop.of(uri, outputUri).asSquare().start(SignUpActivity.this);
                                                     }
                                                 });
                                             }
@@ -276,8 +276,6 @@ public class SignUpActivity extends BaseActivity{
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
             currSeletctedImage = new File(Crop.getOutput(result).getEncodedPath());
-//            update = new UpdateUserProfileApi(EditUserProfileActivity.this, true);
-//            update.setUserPic(currSeletctedImage).runAsync(updateUserListener);
             imgPickImage.setImageURI(Crop.getOutput(result));
         } else {
             if (resultCode == Crop.RESULT_ERROR) {

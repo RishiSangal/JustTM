@@ -58,7 +58,6 @@ import java.util.Map;
  */
 public class UserService extends Service {
 
-
     private Looper mServiceLooper;
     private boolean isRunning = false;
     ServiceHandler mServiceHandler;
@@ -66,7 +65,6 @@ public class UserService extends Service {
     String userId;
     String places = "Not found";
     private String type;
-
 
     @Nullable
     @Override
@@ -106,22 +104,10 @@ public class UserService extends Service {
 
     public void scheduleAlarm() {
         Log.e("AlarmService", "Alarm service started in on create method");
-
         Long time = new GregorianCalendar().getTimeInMillis() + 60 * 1000;
-
-        // create an Intent and set the class which will execute when Alarm triggers, here we have
-        // given AlarmReciever in the Intent, the onRecieve() method of this class will execute when
-        // alarm triggers and
-        //we will write the code to send SMS inside onRecieve() method pf Alarmreciever class
         Intent intentAlarm = new Intent(getBaseContext(), BootCompleteReceiver.class);
-
-        // create the object
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        //set the alarm for particular time
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time,60000, PendingIntent.getBroadcast(this, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-        //  Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
-
     }
 
     @Override

@@ -13,17 +13,10 @@
         android:layout_marginBottom="2dp"
         android:id="@+id/headerListFragment"
         />
-
-
     <ImageView
         android:id="@+id/transparent_image"
         android:layout_width="match_parent"
         android:layout_height="420dp"
         android:src="@color/transparent"
         android:contentDescription="dsc" />
-
-
-
-
-
 </RelativeLayout>
