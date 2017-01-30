@@ -41,32 +41,25 @@ public class EmergencyActivity extends AppCompatActivity {
 
     private void logoutPopup() {
 
-        LayoutInflater li = LayoutInflater.from(EmergencyActivity.this);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setIcon(R.drawable.logo);
         alertDialogBuilder.setTitle("Send Help");
         alertDialogBuilder.setMessage("Are you sure? ");
         alertDialogBuilder
                 .setCancelable(true)
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-
                                 SharedPreferences sharedPreferences = getSharedPreferences("piyush", Context.MODE_PRIVATE);
                                 String lat = sharedPreferences.getString("lat", "Location did not fatched");
                                 String lon = sharedPreferences.getString("lon", "Location did not fatched");
                                 String user = sharedPreferences.getString("userId", "not found");
                                 getDAta(getResources().getString(R.string.url) + "contactEmergency&user_id=" + user + "&long=" + lon + "lat=" + lat);
-
-
                             }
                         })
-                .setNegativeButton("CANCEL",
-                        new DialogInterface.OnClickListener() {
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                                 EmergencyActivity.this.finishAffinity();
-
                             }
                         });
 
@@ -84,30 +77,20 @@ public class EmergencyActivity extends AppCompatActivity {
         pDialog.setMessage("Please Wait...");
         pDialog.show();
 
-        StringRequest strReq = new StringRequest(Request.Method.GET,
-                s
-                , new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, s, new Response.Listener<String>() {
 
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(String response) {
-
                 Log.e("response in Emergency", response);
-
-
                 try {
                     Log.e("response in emergency ", new JSONObject(response).getString("message"));
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("error in myLocation", e.toString());
                 }
-
                 pDialog.hide();
                 EmergencyActivity.this.finishAffinity();
-
-
             }
         }, new Response.ErrorListener() {
 
@@ -117,7 +100,6 @@ public class EmergencyActivity extends AppCompatActivity {
                 pDialog.hide();
                 Toast.makeText(EmergencyActivity
                         .this, error.getMessage(), Toast.LENGTH_LONG).show();
-
             }
         });
 

@@ -26,6 +26,16 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan|stateVisible|adjustResize">
+
+        <activity android:name="com.android.encypher.justtrackme.activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        
         <activity
             android:name="com.android.encypher.justtrackme.registration.MainActivity"
             android:screenOrientation="portrait"
@@ -74,13 +84,6 @@
             android:name="com.android.encypher.justtrackme.activities.GoogleMapsActivity"
             android:label="@string/title_activity_google_maps"
             android:screenOrientation="portrait" />
-        <activity android:name="com.android.encypher.justtrackme.activities.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name="com.android.encypher.justtrackme.home.HomeActivity"
             android:label="@string/title_activity_home"
@@ -165,13 +168,6 @@
         <provider android:authorities="com.facebook.app.FacebookContentProvider1785119295096443"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true"/>
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDJx0Zi4Ry367EADmu991-Y57N4nliRr9Y" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
 
     </application>

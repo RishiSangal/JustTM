@@ -20,6 +20,7 @@ import com.android.encypher.justtrackme.R;
 import com.android.encypher.justtrackme.api.BaseServiceable;
 import com.android.encypher.justtrackme.api.RegistrationApi;
 import com.android.encypher.justtrackme.common.ActivityManager;
+import com.android.encypher.justtrackme.home.HomeActivity;
 import com.soundcloud.android.crop.Crop;
 
 import org.json.JSONException;
@@ -181,7 +182,7 @@ public class SignUpActivity extends BaseActivity{
         public void onComplete(RegistrationApi registrationApi) {
             dismissDialog();
             if (registrationApi.isValidResponse()){
-                Intent i = new Intent(SignUpActivity.this, SmartActivity.class);
+                Intent i = new Intent(SignUpActivity.this, HomeActivity.class);
                 startActivity(i);
                 ActivityManager.getInstance().clearStack();
                 finish();
@@ -228,9 +229,9 @@ public class SignUpActivity extends BaseActivity{
             return;
         switch (requestCode) {
             case Crop.REQUEST_PICK:
-                Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis()+".jpg"));
-                //			new Crop(data.getData()).output(outputUri).asSquare().start(this);
-                Crop.of(data.getData(), outputUri).asSquare().start(this);
+                Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis()));
+//                			new Crop(data.getData()).output(outputUri).asSquare().start(this);
+                Crop.of(data.getData(), outputUri).asSquare().start(SignUpActivity.this);
                 break;
             case Crop.REQUEST_CROP:
                 handleCrop(resultCode, data);
@@ -256,6 +257,7 @@ public class SignUpActivity extends BaseActivity{
                                                     public void run() {
                                                         dismissDialog();
                                                         Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis()));
+//                                                        new Crop(uri).output(outputUri).asSquare().start(SignUpActivity.this);
                                                         Crop.of(uri, outputUri).asSquare().start(SignUpActivity.this);
                                                     }
                                                 });
@@ -275,7 +277,7 @@ public class SignUpActivity extends BaseActivity{
     File currSeletctedImage;
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
-            currSeletctedImage = new File(Crop.getOutput(result).getEncodedPath());
+            currSeletctedImage = new File(Crop.getOutput(result).getEncodedPath()+".jpg");
             imgPickImage.setImageURI(Crop.getOutput(result));
         } else {
             if (resultCode == Crop.RESULT_ERROR) {

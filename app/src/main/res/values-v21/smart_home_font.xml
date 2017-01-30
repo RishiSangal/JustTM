@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="smart_hub_icon">&#xe900;</string>
+    <string name="smart_bar_code">&#xe901;</string>
+    <string name="smart_cross_icon">&#xe905;</string>
+    <string name="smart_wink_hub">&#xe90b;</string>
+    <string name="smart_nest_hub">&#xe90a;</string>
+    <string name="smart_ecoo_bee_hub">&#xe908;</string>
+    <string name="smart_camera">&#xe903;</string>
+    <string name="smart_bulb">&#xe902;</string>
+    <string name="smart_curtain">&#xe907;</string>
+    <string name="smart_door">&#xe906;</string>
+    <string name="smart_wifi">&#xe909;</string>
+    <string name="smart_back">&#xe913;</string>
+    <string name="smart_three_dot">&#xe910;</string>
+    <string name="smart_cameras">&#xe904;</string>
+    <string name="smart_lock">&#xe90c;</string>
+    <string name="smart_setting">&#xe91f;</string>
+    <string name="smart_blind">&#xe923;</string>
+    <string name="smart_alarm">&#xe922;</string>
+    <string name="smart_garage">&#xe92c;</string>
+    <string name="smart_lawn">&#xe92a;</string>
+    <string name="smart_remote">&#xe930;</string>
+    <string name="smart_heating">&#xe929;</string>
+    <string name="smart_door_bell">&#xe928;</string>
+    <string name="smart_power">&#xe91d;</string>
+    <string name="smart_sprinkler">&#xe92b;</string>
+    <string name="smart_tick">&#xe915;</string>
+    <string name="smart_battery_zero">&#xe93b;</string>
+    <string name="smart_battery_fifty">&#xe93c;</string>
+    <string name="smart_battery_hundread">&#xe93a;</string>
+
+
+    <string name="scm_plus">&#xe558;</string>
+    <string name="scm_three_dot">&#xf142;</string>
+    <string name="scm_arrow">&#xf105;</string>
+
+    <!--<string name="scm_arrow_left">&#xf104;</string>-->
+    //icon-angle-right
+    <!--<string name="scm_arrow_right">&#xf105;</string>-->
+    //icon-angle-up
+    <!--<string name="scm_arrow_up">&#xf106;</string>-->
+    //icon-angle-down
+    <!--<string name="scm_arrow_down">&#xf107;</string>-->
+    <!--<string name="scm_refresh">&#xe811;</string>-->
+    <!--<string name="scm_circle_dark">&#xe9a2;</string>-->
+    <!--<string name="scm_logout">&#xe8e9;</string>-->
+    <string name="scm_plus_icon">&#xe80c;</string>
+    <string name="scm_setting_icon">&#xe8a1;</string>
+    <string name="scm_sliding_icon">&#xe81a;</string>
+    <!--<string name="scm_profile">&#xe864;</string>-->
+    <string name="scm_help">&#xe820;</string>
+    <string name="scm_change_password">&#xe809;</string>
+    <string name="scm_calender">&#xe81e;</string>
+</resources>

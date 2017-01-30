@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/app_background_color">
 
+    <include layout="@layout/main_header"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

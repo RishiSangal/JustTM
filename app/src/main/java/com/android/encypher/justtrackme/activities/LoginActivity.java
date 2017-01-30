@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity{
                                         editor.putString("lname",new JSONObject(response).getString("lname"));
                                         editor.apply();
 
-                                        Intent in=new Intent(LoginActivity.this, SmartActivity.class);
+                                        Intent in=new Intent(LoginActivity.this, HomeActivity.class);
                                         startActivity(in);
                                         LoginActivity.this.finish();
                                     }else{

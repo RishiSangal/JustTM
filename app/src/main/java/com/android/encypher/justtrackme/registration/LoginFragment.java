@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.encypher.justtrackme.activities.SmartActivity;
 import com.android.encypher.justtrackme.home.HomeActivity;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -135,7 +134,7 @@ public class LoginFragment extends Fragment {
                                         editor.putString("lname",new JSONObject(response).getString("lname"));
                                         editor.apply();
 
-                                        Intent in=new Intent(getActivity(), SmartActivity.class);
+                                        Intent in=new Intent(getActivity(), HomeActivity.class);
                                         startActivity(in);
                                         getActivity().finish();
                                     }else{

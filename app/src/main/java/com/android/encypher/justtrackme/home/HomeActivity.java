@@ -125,6 +125,8 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
     View hView;
     GoogleMap mMap;
     ProgressBar pr;
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,30 +153,22 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
         TextView gpsE = (TextView) findViewById(R.id.textView16);
         gpsE.setVisibility(View.INVISIBLE);
 
-
         if (!statusOfGPS) {
             gpsE.setVisibility(View.VISIBLE);
         } else {
             gpsE.setVisibility(View.INVISIBLE);
         }
 
-
         listView = (ListView) findViewById(R.id.groupList);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabHome);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+
         assert fab != null;
         fab.setOnClickListener(fabClick);
 
-
-        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         assert swipeRefreshLayout != null;
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.e("swipe", "onRefresh called from SwipeRefreshLayout");
-                startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+        swipeRefreshLayout.setOnRefreshListener(onSwapListener);
 
-            }
-        });
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.header_listview_layout, listView, false);
         assert listView != null;
@@ -187,15 +181,12 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
         Log.e("going for map", "map");
 
         transparentImageView.setOnTouchListener(transparentImageClick);
-
-
         listView.setOnScrollListener(HomeActivity.this);
         listView.setOnItemClickListener(listViewClick);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         try {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         } catch (NullPointerException e) {
@@ -227,6 +218,14 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
         sp.setOnItemSelectedListener(spinnerClick);
         new Abc().execute();
     }
+
+    private SwipeRefreshLayout.OnRefreshListener onSwapListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            Log.e("swipe", "onRefresh called from SwipeRefreshLayout");
+            startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+        }
+    };
 
     private View.OnTouchListener transparentImageClick = new View.OnTouchListener() {
         @Override
@@ -741,6 +740,10 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
 //            }
             if (!PermissionsManager.get().isLocationGranted()){
                 PermissionsManager.get().requestLocationPermission(HomeActivity.this);
+            }
+            else {
+                Intent in1 = new Intent(HomeActivity.this, UserService.class);
+                startService(in1);
             }
 
         } else {

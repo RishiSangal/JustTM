@@ -19,6 +19,8 @@ import com.android.encypher.justtrackme.R;
 import com.android.encypher.justtrackme.home.HomeActivity;
 import com.android.encypher.justtrackme.service.UserService;
 
+
+@Deprecated
 public class SmartActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
