@@ -46,7 +46,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Hashtable;
 import java.util.Map;
 
-
+@Deprecated
 public class ImageLoaderFragment extends Fragment {
 
     private static final int IMAGE = 2222;

@@ -7,6 +7,7 @@ import com.android.encypher.justtrackme.R;
 import com.android.encypher.justtrackme.activities.BaseActivity;
 import com.android.encypher.justtrackme.adapter.Communicator;
 
+@Deprecated
 public class MainActivity extends BaseActivity implements Communicator {
 
     @Override

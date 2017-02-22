@@ -1,6 +1,5 @@
 package com.android.encypher.justtrackme.home;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,14 +19,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,8 +45,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.widget.SwipeRefreshLayout;
 
+import com.android.encypher.justtrackme.R;
 import com.android.encypher.justtrackme.activities.BaseActivity;
 import com.android.encypher.justtrackme.activities.InfoActivity;
 import com.android.encypher.justtrackme.activities.MemberDetailsActivity;
@@ -64,6 +60,7 @@ import com.android.encypher.justtrackme.nevigationdrawer.NevigationDrawerActivit
 import com.android.encypher.justtrackme.nevigationdrawer.PremiumFragment;
 import com.android.encypher.justtrackme.nevigationdrawer.RealPlacesFragment;
 import com.android.encypher.justtrackme.nevigationdrawer.SahreFragment;
+import com.android.encypher.justtrackme.registration.MainActivity;
 import com.android.encypher.justtrackme.service.UserService;
 import com.android.encypher.justtrackme.utility.CustomVolleyRequest;
 import com.android.encypher.justtrackme.utility.NoNetworkFragment;
@@ -76,8 +73,6 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.android.encypher.justtrackme.R;
-import com.android.encypher.justtrackme.registration.MainActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -95,7 +90,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Communicator, AbsListView.OnScrollListener {
+public class HomeActivity extends BaseActivity implements
+        Communicator, AbsListView.OnScrollListener {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private int lastTopValue = 0;
@@ -126,7 +122,6 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
     GoogleMap mMap;
     ProgressBar pr;
     SwipeRefreshLayout swipeRefreshLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +158,6 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabHome);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
 
-        assert fab != null;
         fab.setOnClickListener(fabClick);
 
         assert swipeRefreshLayout != null;
@@ -171,13 +165,12 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.header_listview_layout, listView, false);
-        assert listView != null;
         listView.addHeaderView(header, null, false);
 
         transparentImageView = (ImageView) header.findViewById(R.id.transparent_image);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.headerListFragment);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(onMapReadyListener);
         Log.e("going for map", "map");
 
         transparentImageView.setOnTouchListener(transparentImageClick);
@@ -218,6 +211,27 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
         sp.setOnItemSelectedListener(spinnerClick);
         new Abc().execute();
     }
+
+    private OnMapReadyCallback onMapReadyListener = new OnMapReadyCallback() {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mMap = googleMap;
+            try {
+                Log.e("onMApReady", "I am in on mapReady");
+                String lat = sharedPreferences.getString("lat", "0.0");
+                String lon = sharedPreferences.getString("lon", "0.0");
+                LatLng latLng1 = new LatLng(Double.valueOf(lat), Double.valueOf(lon));
+//                       mMap.addMarker(new MarkerOptions().title(memName.get(i)));
+//                        LatLng latLng1 = new LatLng(28.581056, 77.3175023);
+                mMap.setMyLocationEnabled(true);
+                mMap.addMarker(new MarkerOptions().position(latLng1)).setIcon(BitmapDescriptorFactory.fromBitmap(writeTextOnDrawable(R.drawable.chat, "you")));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng1));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            } catch (NumberFormatException e) {
+                Log.e("onMApReady", e.toString());
+            }
+        }
+    };
 
     private SwipeRefreshLayout.OnRefreshListener onSwapListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
@@ -876,15 +890,6 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
 
     }
 
-
-
-
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//
-//    }
-
     @Override
     public void onDestroy() {
         Intent in = new Intent();
@@ -957,38 +962,16 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
                             public void onClick(DialogInterface dialog, int id) {
 
                                 if (!(userInput.getText().toString().isEmpty())) {
-
                                     if (check.equals("1")) {
-
-
                                         CheckInName = userInput.getText().toString();
-
 //                                        callingApi(userId, (getResources().getString(R.string.url) + "checkin&name=" + CheckInName + "&user_id=").replaceAll("\\s+", "%20"));
-
                                     } else {
                                         newGroupName = userInput.getText().toString();
-
                                         addCircle(userId, newGroupName);
-
-
                                     }
                                 } else {
                                     Toast.makeText(HomeActivity.this, "Enter Name First", Toast.LENGTH_SHORT).show();
                                 }
-                                //   Toast.makeText(HomeActivity.this,userInput.getText().toString(),Toast.LENGTH_LONG).show();
-//                                ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
-//
-//                                Boolean isInternetPresent = cd.isConnectingToInternet();
-//
-//                                if (isInternetPresent) {
-//
-//
-//                                } else {
-//                                    Toast.makeText(HomeActivity.this,
-//                                            "You don't have internet connection.", Toast.LENGTH_LONG).show();
-//                                }
-
-
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -997,51 +980,12 @@ public class HomeActivity extends BaseActivity implements OnMapReadyCallback, Co
                                 dialog.cancel();
                             }
                         });
-
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-
         // show it
         alertDialog.show();
 
     }
-
-    //
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        mMap = googleMap;
-        try {
-
-            Log.e("onMApReady", "I am in on mapReady");
-
-            String lat = sharedPreferences.getString("lat", "0.0");
-            String lon = sharedPreferences.getString("lon", "0.0");
-            LatLng latLng1 = new LatLng(Double.valueOf(lat), Double.valueOf(lon));
-
-//                       mMap.addMarker(new MarkerOptions().title(memName.get(i)));
-//                        LatLng latLng1 = new LatLng(28.581056, 77.3175023);
-
-            googleMap.addMarker(new MarkerOptions().position(latLng1)).setIcon(BitmapDescriptorFactory.fromBitmap(writeTextOnDrawable(R.drawable.chat, "you")));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng1));
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        } catch (NumberFormatException e) {
-            Log.e("onMApReady", e.toString());
-        }
-    }
-//    @Override
-//    public void onBackPressed() {
-//
-//
-//        if (back_pressed + 2000 > System.currentTimeMillis()) {
-//            super.onBackPressed();
-//        } else {
-//            Toast.makeText(HomeActivity.this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
-//            back_pressed = System.currentTimeMillis();
-//        }
-//
-//
-//    }
 
     private void addCircle(final String userId, String cName) {
 

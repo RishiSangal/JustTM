@@ -230,8 +230,8 @@ public class SignUpActivity extends BaseActivity{
         switch (requestCode) {
             case Crop.REQUEST_PICK:
                 Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis()));
-//                			new Crop(data.getData()).output(outputUri).asSquare().start(this);
-                Crop.of(data.getData(), outputUri).asSquare().start(SignUpActivity.this);
+                new Crop(data.getData()).output(outputUri).asSquare().start(this);
+//                Crop.of(data.getData(), outputUri).asSquare().start(SignUpActivity.this);
                 break;
             case Crop.REQUEST_CROP:
                 handleCrop(resultCode, data);
@@ -257,8 +257,8 @@ public class SignUpActivity extends BaseActivity{
                                                     public void run() {
                                                         dismissDialog();
                                                         Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis()));
-//                                                        new Crop(uri).output(outputUri).asSquare().start(SignUpActivity.this);
-                                                        Crop.of(uri, outputUri).asSquare().start(SignUpActivity.this);
+                                                        new Crop(uri).output(outputUri).asSquare().start(SignUpActivity.this);
+//                                                        Crop.of(uri, outputUri).asSquare().start(SignUpActivity.this);
                                                     }
                                                 });
                                             }

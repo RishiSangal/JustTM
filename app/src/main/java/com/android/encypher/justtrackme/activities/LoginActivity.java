@@ -46,8 +46,9 @@ public class LoginActivity extends BaseActivity{
         initalize();
     }
 
+    Button login;
     private void initalize() {
-        Button btn= (Button) findViewById(R.id.login);
+        login = (Button) findViewById(R.id.login);
         loginEmail= (EditText) findViewById(R.id.loginEmail);
         password= (EditText) findViewById(R.id.loginPassword);
 
@@ -60,101 +61,89 @@ public class LoginActivity extends BaseActivity{
             }
         });
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pDialog = new ProgressDialog(LoginActivity.this);
+        login.setOnClickListener(loginClick);
+    }
 
+    private View.OnClickListener loginClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            pDialog = new ProgressDialog(LoginActivity.this);
+            if(!(loginEmail.getText().toString().isEmpty() )){
 
-                if(!(loginEmail.getText().toString().isEmpty() )){
+                if(!(password.getText().toString().isEmpty())){
 
-                    if(!(password.getText().toString().isEmpty())){
+                    pDialog.setMessage("Loading...");
+                    pDialog.show();
+                    usr=loginEmail.getText().toString();
 
-                        pDialog.setMessage("Loading...");
-                        pDialog.show();
+                    String url = getResources().getString(R.string.url)+"login&username="+usr
+                            +"&password="+password.getText().toString();
+                    RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
 
-                        usr=loginEmail.getText().toString();
+                    StringRequest strReq = new StringRequest(Request.Method.GET,
+                            url, new Response.Listener<String>() {
 
-                        String url = getResources().getString(R.string.url)+"login&username="+usr
-                                +"&password="+password.getText().toString();
+                        @Override
+                        public void onResponse(String response) {
+                            Log.e( "response",response);
 
+                            try {
+                                Toast.makeText(LoginActivity.this,new JSONObject(response).getString("message"),Toast.LENGTH_LONG).show();
+                                if(new JSONObject(response).getString("success").equals("1")){
 
-                        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-
-                        StringRequest strReq = new StringRequest(Request.Method.GET,
-                                url, new Response.Listener<String>() {
-
-                            @Override
-                            public void onResponse(String response) {
-                                Log.e( "response",response);
-
-                                try {
-                                    Toast.makeText(LoginActivity.this,new JSONObject(response).getString("message"),Toast.LENGTH_LONG).show();
-
-
-                                    if(new JSONObject(response).getString("success").equals("1")){
-
-                                        SharedPreferences sharedPreferences=LoginActivity.this.getSharedPreferences("piyush", Context.MODE_PRIVATE);
-                                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                                        editor.putString("login","success");
-                                        editor.putString("userId",new JSONObject(response).getString("user_id"));
-                                        editor.putString("type",new JSONObject(response).getString("type"));
-                                        String str;
-                                        if("1".equals(new JSONObject(response).getString("global_share"))){
-                                            str="public";
-                                        }else{
-                                            str="private";
-                                        }
-                                        editor.putString("gs",str);
-                                        editor.putString("userName",usr);
-                                        editor.putString("email",new JSONObject(response).getString("email"));
-                                        editor.putString("phone",new JSONObject(response).getString("mobile"));
-                                        editor.putString("image",new JSONObject(response).getString("image"));
-                                        editor.putString("fname",new JSONObject(response).getString("fname"));
-                                        editor.putString("lname",new JSONObject(response).getString("lname"));
-                                        editor.apply();
-
-                                        Intent in=new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(in);
-                                        LoginActivity.this.finish();
+                                    SharedPreferences sharedPreferences=LoginActivity.this.getSharedPreferences("piyush", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                                    editor.putString("login","success");
+                                    editor.putString("userId",new JSONObject(response).getString("user_id"));
+                                    editor.putString("type",new JSONObject(response).getString("type"));
+                                    String str;
+                                    if("1".equals(new JSONObject(response).getString("global_share"))){
+                                        str="public";
                                     }else{
-                                        pDialog.hide();
-
+                                        str="private";
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(LoginActivity.this,e.toString(),Toast.LENGTH_LONG).show();
+                                    editor.putString("gs",str);
+                                    editor.putString("userName",usr);
+                                    editor.putString("email",new JSONObject(response).getString("email"));
+                                    editor.putString("phone",new JSONObject(response).getString("mobile"));
+                                    editor.putString("image",new JSONObject(response).getString("image"));
+                                    editor.putString("fname",new JSONObject(response).getString("fname"));
+                                    editor.putString("lname",new JSONObject(response).getString("lname"));
+                                    editor.apply();
+
+                                    Intent in=new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(in);
+                                    LoginActivity.this.finish();
+                                }else{
+                                    pDialog.hide();
 
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(LoginActivity.this,e.toString(),Toast.LENGTH_LONG).show();
 
                             }
-                        }, new Response.ErrorListener() {
 
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                VolleyLog.e( "Error in volley Login: " + error.getMessage());
-                                pDialog.hide();
-                            }
-                        });
+                        }
+                    }, new Response.ErrorListener() {
 
-                        queue.add(strReq);
-
-
-                    }else {
-                        Toast.makeText(LoginActivity.this,"Enter password",Toast.LENGTH_LONG).show();
-                    }
-
-                }else{
-                    Toast.makeText(LoginActivity.this,"Enter user name",Toast.LENGTH_LONG).show();
-
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            VolleyLog.e( "Error in volley Login: " + error.getMessage());
+                            pDialog.hide();
+                        }
+                    });
+                    queue.add(strReq);
+                }else {
+                    Toast.makeText(LoginActivity.this,"Enter password",Toast.LENGTH_LONG).show();
                 }
-
-
+            }else{
+                Toast.makeText(LoginActivity.this,"Enter user name",Toast.LENGTH_LONG).show();
             }
 
+        }
+    };
 
-        });
-    }
     private void addEmail() {
 
         // get prompts.xml view

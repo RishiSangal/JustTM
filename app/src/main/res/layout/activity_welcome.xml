@@ -16,10 +16,10 @@
         android:layout_marginBottom="15dp">
 
         <Button
+            android:id="@+id/signlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/buttonbox"
-            android:id="@+id/signlogin"
             android:textColor="@color/white"
             android:text="SIGN IN"
             android:elevation="5dp"

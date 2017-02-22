@@ -21,10 +21,10 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 //        getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.scree_n));
-        View decorView = getWindow().getDecorView();
-// Hide the status bar.
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+//        View decorView = getWindow().getDecorView();
+//        Hide the status bar.
+//        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+//        decorView.setSystemUiVisibility(uiOptions);
 
         setContentView(R.layout.activity_splash);
 
@@ -33,7 +33,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void run() {
-                if (!(sharedPreferences.getString("login", "0").equals("0"))) {
+                if (sharedPreferences.getString("login", "0").equalsIgnoreCase("success")) {
 
                     Intent in = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(in);
