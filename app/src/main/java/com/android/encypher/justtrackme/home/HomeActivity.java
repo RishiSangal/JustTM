@@ -91,7 +91,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class HomeActivity extends BaseActivity implements
-        Communicator, AbsListView.OnScrollListener {
+        Communicator{
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private int lastTopValue = 0;
@@ -174,7 +174,7 @@ public class HomeActivity extends BaseActivity implements
         Log.e("going for map", "map");
 
         transparentImageView.setOnTouchListener(transparentImageClick);
-        listView.setOnScrollListener(HomeActivity.this);
+        listView.setOnScrollListener(listScrollChanged);
         listView.setOnItemClickListener(listViewClick);
 
 
@@ -189,20 +189,16 @@ public class HomeActivity extends BaseActivity implements
         switchButton = (Switch) findViewById(R.id.switch1);
         TextView checkIn = (TextView) findViewById(R.id.toolText);
 
-        assert switchButton != null;
-        assert checkIn != null;
 
         switchButton.setOnCheckedChangeListener(switchButtonClick);
         checkIn.setOnClickListener(checkInClick);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        assert drawer != null;
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(navigationViewSelected);
 
         hView = navigationView.getHeaderView(0);
@@ -211,6 +207,24 @@ public class HomeActivity extends BaseActivity implements
         sp.setOnItemSelectedListener(spinnerClick);
         new Abc().execute();
     }
+
+    private AbsListView.OnScrollListener listScrollChanged = new AbsListView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+        }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            Rect rect = new Rect();
+            transparentImageView.getLocalVisibleRect(rect);
+            if (lastTopValue != rect.top) {
+                lastTopValue = rect.top;
+                transparentImageView.setY((float) (rect.top / 2.0));
+            }
+        }
+    };
+
 
     private OnMapReadyCallback onMapReadyListener = new OnMapReadyCallback() {
         @Override
@@ -309,9 +323,69 @@ public class HomeActivity extends BaseActivity implements
             } else {
                 status = "private";
             }
-            changeincircleshare(getResources().getString(R.string.url) + "changeincircleshare&" + "user_id=" + userId + "&circle_id=" + circle_id.get(pos) + "&shared_status=", status);
+            changeincircleshare(getResources().getString(R.string.url) + "changeincircleshare&" + "user_id=" + userId + "&circle_id=" +
+                    circle_id.get(pos) + "&shared_status=", status);
         }
     };
+
+    private void changeincircleshare(String s, final String status) {
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        pr.setVisibility(View.VISIBLE);
+        Log.e("change in circle URl=", s + status);
+//        Log.e("Bef shared_Status=",""+sharedStatus.get(pos)+pos);
+
+
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                s + status
+                , new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.e("responseshar in circle", response);
+                pr.setVisibility(View.INVISIBLE);
+
+                try {
+                    Toast.makeText(HomeActivity.this, new JSONObject(response).getString("message"), Toast.LENGTH_LONG).show();
+//                    sharedStatus.add(pos,status);
+//                    Log.e("change in sharedStatus=",""+sharedStatus.get(pos)+pos);
+//                    if (sharedStatus.equals("public")) {
+//                        switchButton.setChecked(false);
+//                    }else{
+//                        switchButton.setChecked(true);
+//                    }
+
+//                        SharedPreferences.Editor editor = sharedPreferences.edit();
+//                        if (sharedPreferences.getString("ges", "o").equals("private")) {
+//                            editor.putString("gs", "public");
+//                        } else if (sharedPreferences.getString("ges", "o").equals("public")) {
+//                            editor.putString("gs", "private");
+//
+//
+//                        editor.apply();
+
+//                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    NoNetworkfrag();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: " + error.getMessage());
+                pr.setVisibility(View.INVISIBLE);
+//                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                NoNetworkfrag();
+
+            }
+        });
+
+        queue.add(strReq);
+    }
 
     private View.OnClickListener fabClick = new View.OnClickListener() {
         @Override
@@ -352,77 +426,52 @@ public class HomeActivity extends BaseActivity implements
             int id = item.getItemId();
 
             if (id == R.id.activities) {
-
                 Intent in = new Intent(HomeActivity.this, NevigationDrawerActivity.class);
                 in.putExtra("data", "activities");
                 startActivity(in);
-
-
             } else if (id == R.id.lifeLine) {
-
                 Intent in = new Intent(HomeActivity.this, LIfeLineActivity.class);
-
                 startActivity(in);
-
-
             } else if (id == R.id.places) {
-
                 RealPlacesFragment s = new RealPlacesFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.drawer_layout, s);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
             } else if (id == R.id.premium) {
-
                 PremiumFragment s = new PremiumFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.drawer_layout, s);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
-
             } else if (id == R.id.setting) {
-//
 //            Intent in = new Intent(HomeActivity.this, NevigationDrawerActivity.class);
 //            in.putExtra("data", "settings");
 //            startActivity(in);
-
                 z = 1;
                 GlobalShareFragment s = new GlobalShareFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.drawer_layout, s);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
-
             } else if (id == R.id.logout) {
                 logoutPopup();
-
             } else if (id == R.id.help) {
-
-
                 HelpFragment s = new HelpFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.drawer_layout, s);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
-
             } else if (id == R.id.nav_share) {
-
                 SahreFragment s = new SahreFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.drawer_layout, s);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
-
             } else if (id == R.id.myLocations) {
                 Intent in = new Intent(HomeActivity.this, MyLocationActivity.class);
                 in.putExtra("memberdata","home");
                 startActivity(in);
-
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -449,7 +498,6 @@ public class HomeActivity extends BaseActivity implements
 
                 }
                 sp = (Spinner) findViewById(R.id.toolSpinner);
-                assert sp != null;
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_dropdown_item, spinnerValue);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 adapter.notifyDataSetChanged();
@@ -552,7 +600,8 @@ public class HomeActivity extends BaseActivity implements
                     }
 
 
-                    GroupDetailAdapter ad = new GroupDetailAdapter(HomeActivity.this, memName, memMobile, memLat, memLong, memImage, memGs, lastBattery, memTime);
+                    GroupDetailAdapter ad = new GroupDetailAdapter(HomeActivity.this, memName, memMobile, memLat, memLong, memImage, memGs,
+                            lastBattery, memTime);
                     ad.notifyDataSetChanged();
                     pr.setVisibility(View.INVISIBLE);
 
@@ -607,22 +656,6 @@ public class HomeActivity extends BaseActivity implements
 
     }
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        Rect rect = new Rect();
-
-        transparentImageView.getLocalVisibleRect(rect);
-        if (lastTopValue != rect.top) {
-            lastTopValue = rect.top;
-            transparentImageView.setY((float) (rect.top / 2.0));
-        }
-    }
-
     private Bitmap writeTextOnDrawable(int drawableId, String text) {
 
         Bitmap bm = BitmapFactory.decodeResource(getResources(), drawableId)
@@ -662,71 +695,6 @@ public class HomeActivity extends BaseActivity implements
 
         return (int) ((nDP * conversionScale) + 0.5f);
 
-    }
-
-    private void changeincircleshare(String s, final String status) {
-
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        pr.setVisibility(View.VISIBLE);
-        Log.e("change in circle URl=", s + status);
-//        Log.e("Bef shared_Status=",""+sharedStatus.get(pos)+pos);
-
-
-        StringRequest strReq = new StringRequest(Request.Method.GET,
-                s + status
-                , new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.e("responseshar in circle", response);
-
-
-                pr.setVisibility(View.INVISIBLE);
-
-                try {
-                    Toast.makeText(HomeActivity.this, new JSONObject(response).getString("message"), Toast.LENGTH_LONG).show();
-//                    sharedStatus.add(pos,status);
-//                    Log.e("change in sharedStatus=",""+sharedStatus.get(pos)+pos);
-
-
-//                    if (sharedStatus.equals("public")) {
-//                        switchButton.setChecked(false);
-//                    }else{
-//                        switchButton.setChecked(true);
-//
-//                    }
-
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        if (sharedPreferences.getString("ges", "o").equals("private")) {
-//                            editor.putString("gs", "public");
-//                        } else if (sharedPreferences.getString("ges", "o").equals("public")) {
-//                            editor.putString("gs", "private");
-//
-//
-//                        editor.apply();
-
-//                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    NoNetworkfrag();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: " + error.getMessage());
-                pr.setVisibility(View.INVISIBLE);
-//                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                NoNetworkfrag();
-
-            }
-        });
-
-        queue.add(strReq);
     }
 
 
@@ -923,8 +891,6 @@ public class HomeActivity extends BaseActivity implements
 
     @Override
     public void floatToConatct(String home, String circle_id) {
-
-
         ContactFragment s = new ContactFragment();
 ////                SplashFragment ws=new SplashFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -1049,8 +1015,6 @@ public class HomeActivity extends BaseActivity implements
             user = (NetworkImageView) hView.findViewById(R.id.navImageView);
             TextView tv = (TextView) hView.findViewById(R.id.userId);
             tv.setText(sharedPreferences.getString("userName", "o"));
-
-            assert user != null;
             ImageLoader imageLoader;
 
             String userImage = sharedPreferences.getString("image", "o");
